@@ -12,4 +12,10 @@ export interface Article {
   published_date: string;
   material_type_facet: string;
   kicker: string;
+  desc_facet: string;
+  org_facet: string;
+  per_facet: string;
+  geo_facet: string;
+  multimedia: unknown[];
+  short_url: string;
 }

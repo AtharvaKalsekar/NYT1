@@ -1,11 +1,16 @@
+import { useEffect } from "react";
 import { Text, View } from "react-native";
+import { getTopStories } from "@services";
 
-const NewsFeed = () => {
+export const NewsFeed = () => {
+  useEffect(() => {
+    const data = getTopStories({});
+    console.log({ data1: data });
+  }, []);
+
   return (
     <View>
-      <Text>NewsFeed page</Text>
+      <Text>NewsFeed page.</Text>
     </View>
   );
 };
-
-export default NewsFeed;

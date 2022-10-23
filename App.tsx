@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-import NewsFeed from "./screens/NewsFeed";
+import { NewsFeed } from "@screens";
 
 export default function App() {
   return (
