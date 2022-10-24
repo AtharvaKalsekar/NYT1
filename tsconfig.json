@@ -7,7 +7,8 @@
       "@common": ["./common"],
       "@models": ["./models"],
       "@screens": ["./screens"],
-      "@services": ["./services"]
+      "@services": ["./services"],
+      "@store": ["./store"]
     }
   }
 }

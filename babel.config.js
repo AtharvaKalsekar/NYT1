@@ -11,6 +11,7 @@ module.exports = function (api) {
             "@models": "./models",
             "@screens": "./screens",
             "@services": "./services",
+            "@store": "./store",
           },
         },
       ],
