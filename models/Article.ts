@@ -1,3 +1,5 @@
+import { Multimedia } from "./Multimedia";
+
 export interface Article {
   section: string;
   subsection: string;
@@ -16,6 +18,6 @@ export interface Article {
   org_facet: string;
   per_facet: string;
   geo_facet: string;
-  multimedia: unknown[];
+  multimedia: Multimedia[];
   short_url: string;
 }

@@ -16,7 +16,9 @@ export const Article = () => {
           uri: multimedia[0].url,
         }}
       />
-      <ArticleTextView abstract={abstract} title={title} byline={byline} />
+      <View style={styles.textContainer}>
+        <ArticleTextView abstract={abstract} title={title} byline={byline} />
+      </View>
     </View>
   );
 };
@@ -27,6 +29,11 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 150,
+    height: "50%",
+  },
+  textContainer: {
+    marginTop: 15,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
   },
 });

@@ -62,11 +62,13 @@ export const NewsFeed = () => {
             }}
             onPress={() => onPress(item)}
           >
-            <ArticleTextView
-              title={title}
-              abstract={abstract}
-              byline={byline}
-            />
+            <View style={styles.listItem}>
+              <ArticleTextView
+                title={title}
+                abstract={abstract}
+                byline={byline}
+              />
+            </View>
           </Pressable>
         );
       }}
@@ -81,5 +83,13 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     paddingHorizontal: 2,
+  },
+  listItem: {
+    padding: 6,
+    marginHorizontal: 1,
+    marginVertical: 3,
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: "black",
   },
 });
