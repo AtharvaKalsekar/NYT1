@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import {
   ActivityIndicator,
   FlatList,
+  Pressable,
   StyleSheet,
   Text,
   View,
@@ -15,12 +16,27 @@ import {
   RootState,
 } from "@store";
 import { ArticleTextView, UILoader } from "@components";
+import { useNavigation } from "@react-navigation/native";
+import { useCallback } from "react";
+import { Article } from "@models";
+import { StackNavProps } from "modules/navigation/types";
 
 export const NewsFeed = () => {
   const dispatch = useDispatch<AppDispatch>();
 
+  const { navigate } = useNavigation<StackNavProps>();
+
   const { articles, loading } = useSelector<RootState, TopStoriesState>(
     (state) => state.topStories
+  );
+
+  const onPress = useCallback(
+    (article: Article) => {
+      navigate("Article", {
+        ...article,
+      });
+    },
+    [navigate]
   );
 
   useEffect(() => {
@@ -38,8 +54,20 @@ export const NewsFeed = () => {
       keyExtractor={(item) => item.uri}
       renderItem={({ item }) => {
         const { title, abstract, byline } = item;
+
         return (
-          <ArticleTextView title={title} abstract={abstract} byline={byline} />
+          <Pressable
+            android_ripple={{
+              color: "#9bdbfa",
+            }}
+            onPress={() => onPress(item)}
+          >
+            <ArticleTextView
+              title={title}
+              abstract={abstract}
+              byline={byline}
+            />
+          </Pressable>
         );
       }}
     />
