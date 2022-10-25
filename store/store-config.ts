@@ -1,8 +1,4 @@
-import {
-  configureStore,
-  combineReducers,
-  getDefaultMiddleware,
-} from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { TopStoriesSlice } from "./TopStories";
 
 const reducer = combineReducers({
@@ -11,7 +7,6 @@ const reducer = combineReducers({
 
 export const store = configureStore({
   reducer,
-  middleware: getDefaultMiddleware(),
   devTools: true,
 });
 

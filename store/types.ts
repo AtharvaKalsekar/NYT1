@@ -1,7 +1,7 @@
 export enum LoadingStages {
   IDLE = "idle",
   PENDING = "pending",
-  SUCCEEDED = "successed",
+  SUCCEEDED = "succeeded",
   FAILED = "failed",
 }
 

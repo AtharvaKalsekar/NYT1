@@ -1,8 +1,20 @@
 import { useEffect } from "react";
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "store/store-config";
-import { fetchTopStories, TopStoriesState } from "@store";
+import {
+  LoadingStages,
+  fetchTopStories,
+  TopStoriesState,
+  AppDispatch,
+  RootState,
+} from "@store";
+import { ArticleTextView, UILoader } from "@components";
 
 export const NewsFeed = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -15,16 +27,19 @@ export const NewsFeed = () => {
     dispatch(fetchTopStories());
   }, [fetchTopStories]);
 
+  if (loading === LoadingStages.PENDING) {
+    return <UILoader />;
+  }
+
   return (
     <FlatList
       style={styles.listContainer}
       data={articles}
       keyExtractor={(item) => item.uri}
       renderItem={({ item }) => {
+        const { title, abstract, byline } = item;
         return (
-          <View style={styles.listItem}>
-            <Text>{item.byline}</Text>
-          </View>
+          <ArticleTextView title={title} abstract={abstract} byline={byline} />
         );
       }}
     />
@@ -38,13 +53,5 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     paddingHorizontal: 2,
-  },
-  listItem: {
-    padding: 3,
-    marginHorizontal: 1,
-    marginVertical: 3,
-    borderRadius: 4,
-    borderWidth: 2,
-    borderColor: "black",
   },
 });
