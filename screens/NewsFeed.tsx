@@ -60,15 +60,14 @@ export const NewsFeed = () => {
             android_ripple={{
               color: "#9bdbfa",
             }}
+            style={styles.listItem}
             onPress={() => onPress(item)}
           >
-            <View style={styles.listItem}>
-              <ArticleTextView
-                title={title}
-                abstract={abstract}
-                byline={byline}
-              />
-            </View>
+            <ArticleTextView
+              title={title}
+              abstract={abstract}
+              byline={byline}
+            />
           </Pressable>
         );
       }}
@@ -85,11 +84,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 2,
   },
   listItem: {
-    padding: 6,
-    marginHorizontal: 1,
-    marginVertical: 3,
-    borderRadius: 4,
-    borderWidth: 2,
-    borderColor: "black",
+    padding: 8,
+    marginHorizontal: 6,
+    marginVertical: 5,
+    borderRadius: 8,
+    backgroundColor: "white",
+    elevation: 12,
   },
 });

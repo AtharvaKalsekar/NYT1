@@ -3,9 +3,12 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { Provider } from "react-redux";
 import { store } from "@store";
-import { NavigationContainer } from "@react-navigation/native";
+import { LinkingOptions, NavigationContainer } from "@react-navigation/native";
 import { UILoader } from "@components";
 import { Stack } from "@modules";
+import * as Linking from "expo-linking";
+
+const prefix = Linking.createURL("/");
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -16,19 +19,26 @@ export default function App() {
     return <UILoader />;
   }
 
+  const linking: LinkingOptions<any> = {
+    prefixes: [prefix],
+    config: {
+      screens: {
+        Article: {
+          path: "/article/:articleId",
+          parse: {
+            id: (articleId) => articleId,
+          },
+        },
+      },
+    },
+  };
+
   return (
     <Provider store={store}>
-      <NavigationContainer>
+      <NavigationContainer linking={linking}>
         <Stack />
       </NavigationContainer>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});

@@ -1,12 +1,34 @@
-import { ArticleTextView } from "@components";
+import { useLayoutEffect } from "react";
+import { ArticleTextView, ShareAction } from "@components";
 import { Article as TArticle } from "@models";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Image, StyleSheet, View } from "react-native";
 
 export const Article = () => {
   const { params } = useRoute() as Partial<{ params: TArticle }>;
 
-  const { abstract, title, byline, multimedia } = params!;
+  const { setOptions } = useNavigation();
+
+  const { abstract, title, byline, multimedia, url, uri } = params!;
+
+  useLayoutEffect(() => {
+    setOptions({
+      headerRight: ({ tintColor }: any) => {
+        return (
+          <View style={styles.headerActionsContainer}>
+            <ShareAction
+              color={tintColor}
+              sharableContent={{
+                message: uri,
+                url,
+                title: "Random title",
+              }}
+            />
+          </View>
+        );
+      },
+    });
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -17,7 +39,13 @@ export const Article = () => {
         }}
       />
       <View style={styles.textContainer}>
-        <ArticleTextView abstract={abstract} title={title} byline={byline} />
+        <ArticleTextView
+          enableLinking={true}
+          abstract={abstract}
+          title={title}
+          byline={byline}
+          url={url}
+        />
       </View>
     </View>
   );
@@ -35,5 +63,10 @@ const styles = StyleSheet.create({
     marginTop: 15,
     paddingVertical: 5,
     paddingHorizontal: 10,
+  },
+  headerActionsContainer: {
+    flexDirection: "row",
+    marginRight: 10,
+    padding: 3,
   },
 });

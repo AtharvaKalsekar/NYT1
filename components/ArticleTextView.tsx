@@ -1,19 +1,34 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleProp, StyleSheet, Text, View } from "react-native";
+import { PressableLink } from "./PressableLink";
 
 type TArticleTextView = {
   title: string;
   abstract: string;
   byline: string;
+  enableLinking?: boolean;
+  url?: string;
 };
 
 export const ArticleTextView = ({
   title,
   abstract,
   byline,
+  enableLinking = false,
+  url,
 }: TArticleTextView) => {
+  let headLine = <Text style={styles.title}>{title}</Text>;
+
+  if (enableLinking && url) {
+    headLine = (
+      <PressableLink url={url}>
+        <Text style={styles.title}>{title}</Text>
+      </PressableLink>
+    );
+  }
+
   return (
     <>
-      <Text style={styles.title}>{title}</Text>
+      {headLine}
       <Text style={styles.abstract}>{abstract}</Text>
       <Text style={styles.byline}> - {byline}</Text>
     </>
