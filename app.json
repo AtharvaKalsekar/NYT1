@@ -1,11 +1,12 @@
 {
   "expo": {
     "name": "NYT1",
-    "slug": "NYT1",
+    "slug": "nyt",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "owner": "athar7a",
     "scheme": "nyt",
     "splash": {
       "image": "./assets/splash.png",
@@ -15,7 +16,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -23,10 +26,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.athar7a.nyt"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d1dc6fc5-2eae-4322-af84-761409234e2d"
+      }
     }
   }
 }

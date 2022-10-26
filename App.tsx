@@ -15,6 +15,13 @@ export default function App() {
     "wilson-wells": require("./assets/fonts/wilson-wells/wilson-wells.otf"),
   });
 
+  const url = Linking.useURL();
+  console.log(url);
+
+  if (url) {
+    return <Text>{url}</Text>;
+  }
+
   if (!fontsLoaded) {
     return <UILoader />;
   }
@@ -35,7 +42,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <NavigationContainer linking={linking}>
+      <NavigationContainer>
         <Stack />
       </NavigationContainer>
       <StatusBar style="light" />
