@@ -1,3 +1,5 @@
+import * as WebBrowser from "expo-web-browser";
+
 import { useCallback } from "react";
 import { Alert, Linking, Pressable } from "react-native";
 
@@ -8,13 +10,9 @@ type PressableLinkProps = {
 
 export const PressableLink = ({ url, children }: PressableLinkProps) => {
   const onPress = useCallback(async () => {
-    const supported = await Linking.canOpenURL(url);
-
-    if (supported) {
-      await Linking.openURL(url);
-    } else {
-      Alert.alert(`Cannot open url ${url}`);
-    }
+    // const supported = await Linking.canOpenURL(url);
+    const result = await WebBrowser.openBrowserAsync(url);
+    console.log({ result });
   }, [url]);
 
   return (

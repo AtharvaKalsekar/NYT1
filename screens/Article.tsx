@@ -9,7 +9,7 @@ export const Article = () => {
 
   const { setOptions } = useNavigation();
 
-  const { abstract, title, byline, multimedia, url, uri } = params!;
+  const { abstract, title, byline, multimedia, url } = params!;
 
   useLayoutEffect(() => {
     setOptions({
@@ -19,7 +19,6 @@ export const Article = () => {
             <ShareAction
               color={tintColor}
               sharableContent={{
-                message: uri,
                 url,
                 title: "Random title",
               }}

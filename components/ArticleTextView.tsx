@@ -1,4 +1,4 @@
-import { Pressable, StyleProp, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { PressableLink } from "./PressableLink";
 
 type TArticleTextView = {
