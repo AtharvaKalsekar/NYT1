@@ -1,7 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { NewsFeed } from "@screens";
+import { Trending } from "@screens";
+import { Screens, SCREENS_CONFIG } from "@common";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,14 +35,14 @@ export const BottomTabs = () => {
     >
       <Tab.Screen
         options={{
-          title: "Top Stories",
+          title: SCREENS_CONFIG[Screens.TRENDING].title,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="newspaper-outline" size={size} color={color} />
           ),
           tabBarLabel: "Trending",
         }}
-        name="TopStories"
-        component={NewsFeed}
+        name={SCREENS_CONFIG[Screens.TRENDING].name}
+        component={Trending}
       />
     </Tab.Navigator>
   );

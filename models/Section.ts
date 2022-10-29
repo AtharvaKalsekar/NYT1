@@ -21,7 +21,7 @@ export enum Section {
   TECHNOLOGY = "technology",
   THEATER = "theater",
   T_MAGAZINE = "t-magazine",
-  TRAVEl = "travel",
+  TRAVEL = "travel",
   UPSHOT = "upshot",
   US = "us",
   WORLD = "world",

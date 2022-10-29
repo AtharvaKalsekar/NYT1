@@ -1,3 +1,4 @@
+import { Screens, SCREENS_CONFIG } from "@common";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Article } from "@screens";
 import { StyleSheet, Text } from "react-native";
@@ -14,14 +15,14 @@ export const Stack = () => {
       }}
     >
       <StackNav.Screen
-        name="Main"
+        name={Screens.MAIN}
         component={BottomTabs}
         options={{
           headerShown: false,
         }}
       />
       <StackNav.Screen
-        name="Article"
+        name={Screens.ARTICLE}
         component={Article}
         options={{
           headerStyle: {
