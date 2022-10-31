@@ -1,8 +1,11 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { TopStoriesSlice } from "./TopStories";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+
+import { FiltersSlice } from './Filters';
+import { TopStoriesSlice } from './TopStories';
 
 const reducer = combineReducers({
   topStories: TopStoriesSlice.reducer,
+  filters: FiltersSlice.reducer,
 });
 
 export const store = configureStore({

@@ -1,9 +1,22 @@
 import { Divider } from '@components';
+import { AppDispatch, applyFilters, clearAllFilters } from '@store';
+import { useCallback } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import { SectionAccordion } from './SectionAccordion';
 
 export const FilterMenu = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const onApplyFilters = useCallback(() => {
+    dispatch(applyFilters());
+  }, []);
+
+  const onClearAllFilters = useCallback(() => {
+    dispatch(clearAllFilters());
+  }, []);
+
   return (
     <View style={styles.overlay}>
       <View style={styles.container}>
@@ -16,18 +29,14 @@ export const FilterMenu = () => {
             <Pressable
               android_ripple={{ color: "rgba(0,0,0,0.4)" }}
               style={styles.buttonContainer}
+              onPress={onClearAllFilters}
             >
               <Text style={styles.clearButton}>Clear all</Text>
             </Pressable>
             <Pressable
               android_ripple={{ color: "rgba(0,0,0,0.4)" }}
               style={styles.buttonContainer}
-            >
-              <Text style={styles.cancelButton}>Cancel</Text>
-            </Pressable>
-            <Pressable
-              android_ripple={{ color: "rgba(0,0,0,0.4)" }}
-              style={styles.buttonContainer}
+              onPress={onApplyFilters}
             >
               <Text style={styles.saveButton}>Apply</Text>
             </Pressable>
