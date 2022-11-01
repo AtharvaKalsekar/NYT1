@@ -3,6 +3,7 @@ import { Section } from '@models';
 import { useCallback, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { Badge, BadgeSize } from './Badge';
 import { Divider } from './Divider';
 
 export type AccordionItem = {
@@ -83,11 +84,7 @@ export const Accordion = ({
           <View style={styles.header}>
             <Text style={styles.headerText}>{header}</Text>
             {alreadySelectedItems?.length > 0 && (
-              <View style={styles.headerBadge}>
-                <Text style={styles.headerBadgeText}>
-                  {alreadySelectedItems.length}
-                </Text>
-              </View>
+              <Badge num={alreadySelectedItems.length} size={BadgeSize.LARGE} />
             )}
           </View>
           <Ionicons
@@ -176,19 +173,6 @@ const styles = StyleSheet.create({
   },
   selectedItemText: {
     color: "#379237",
-  },
-  headerBadge: {
-    backgroundColor: "red",
-    borderRadius: 10,
-    width: 20,
-    height: 20,
-    textAlign: "center",
-  },
-  headerBadgeText: {
-    color: "#fff",
-    fontWeight: "600",
-    marginTop: 1,
-    fontSize: 12,
   },
   header: {
     flexDirection: "row",

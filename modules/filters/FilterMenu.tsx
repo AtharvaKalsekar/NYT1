@@ -1,11 +1,11 @@
-import { Divider } from '@components';
+import { Badge, BadgePosition, Divider } from '@components';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { AppDispatch, applyFilters, clearAllFilters } from '@store';
+import { AppDispatch, applyFilters, clearAllFilters, FiltersState, RootState } from '@store';
 import { StackNavProps } from 'modules/navigation';
 import { ReactNode, useCallback, useLayoutEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { SectionAccordion } from './SectionAccordion';
 
@@ -17,6 +17,10 @@ export const FilterMenu = ({ children }: FilterMenuProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const { setOptions } = useNavigation<StackNavProps>();
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
+
+  const { appliedFilters } = useSelector<RootState, FiltersState>(
+    (state) => state.filters
+  );
 
   const onApplyFilters = useCallback(() => {
     dispatch(applyFilters());
@@ -34,15 +38,23 @@ export const FilterMenu = ({ children }: FilterMenuProps) => {
   useLayoutEffect(() => {
     setOptions({
       headerRight: ({ tintColor }) => (
-        <Ionicons
-          onPress={onPressMenu}
-          color={tintColor}
-          size={20}
-          name="filter-outline"
-        />
+        <View style={styles.menuIconContainer}>
+          {appliedFilters.length > 0 && (
+            <Badge
+              num={appliedFilters.length}
+              position={BadgePosition.TOP_RIGHT}
+            />
+          )}
+          <Ionicons
+            onPress={onPressMenu}
+            color={tintColor}
+            size={20}
+            name="filter-outline"
+          />
+        </View>
       ),
     });
-  }, [setOptions]);
+  }, [setOptions, appliedFilters, onPressMenu]);
 
   return (
     <>
@@ -80,6 +92,10 @@ export const FilterMenu = ({ children }: FilterMenuProps) => {
 };
 
 const styles = StyleSheet.create({
+  menuIconContainer: {
+    padding: 5,
+    marginRight: 5,
+  },
   container: {
     top: 0,
     right: 0,
