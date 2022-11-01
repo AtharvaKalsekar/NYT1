@@ -80,7 +80,16 @@ export const Accordion = ({
         onPress={toggleAccordion}
       >
         <View style={styles.headerContinaer}>
-          <Text style={styles.headerText}>{header}</Text>
+          <View style={styles.header}>
+            <Text style={styles.headerText}>{header}</Text>
+            {alreadySelectedItems?.length > 0 && (
+              <View style={styles.headerBadge}>
+                <Text style={styles.headerBadgeText}>
+                  {alreadySelectedItems.length}
+                </Text>
+              </View>
+            )}
+          </View>
           <Ionicons
             name={showItems ? "chevron-up" : "chevron-down"}
             size={24}
@@ -157,14 +166,33 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   selectedItem: {
-    backgroundColor: "#9bdbfa",
-    color: "#fff",
+    borderWidth: 2,
+    borderColor: "#379237",
   },
   itemText: {
     color: "#000",
+    fontWeight: "600",
     fontSize: 11,
   },
   selectedItemText: {
+    color: "#379237",
+  },
+  headerBadge: {
+    backgroundColor: "red",
+    borderRadius: 10,
+    width: 20,
+    height: 20,
+    textAlign: "center",
+  },
+  headerBadgeText: {
     color: "#fff",
+    fontWeight: "600",
+    marginTop: 1,
+    fontSize: 12,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });
