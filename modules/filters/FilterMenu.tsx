@@ -1,49 +1,81 @@
 import { Divider } from '@components';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import { AppDispatch, applyFilters, clearAllFilters } from '@store';
-import { useCallback } from 'react';
+import { StackNavProps } from 'modules/navigation';
+import { ReactNode, useCallback, useLayoutEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { SectionAccordion } from './SectionAccordion';
 
-export const FilterMenu = () => {
+type FilterMenuProps = {
+  children?: ReactNode | ReactNode[];
+};
+
+export const FilterMenu = ({ children }: FilterMenuProps) => {
   const dispatch = useDispatch<AppDispatch>();
+  const { setOptions } = useNavigation<StackNavProps>();
+  const [toggleMenu, setToggleMenu] = useState<boolean>(false);
 
   const onApplyFilters = useCallback(() => {
     dispatch(applyFilters());
+    setToggleMenu(false);
   }, []);
 
   const onClearAllFilters = useCallback(() => {
     dispatch(clearAllFilters());
   }, []);
 
+  const onPressMenu = useCallback(() => {
+    setToggleMenu((toggleMenu) => !toggleMenu);
+  }, []);
+
+  useLayoutEffect(() => {
+    setOptions({
+      headerRight: ({ tintColor }) => (
+        <Ionicons
+          onPress={onPressMenu}
+          color={tintColor}
+          size={20}
+          name="filter-outline"
+        />
+      ),
+    });
+  }, [setOptions]);
+
   return (
-    <View style={styles.overlay}>
-      <View style={styles.container}>
-        <ScrollView>
-          <SectionAccordion />
-        </ScrollView>
-        <View style={styles.filterActionsContainer}>
-          <Divider />
-          <View style={styles.filterActions}>
-            <Pressable
-              android_ripple={{ color: "rgba(0,0,0,0.4)" }}
-              style={styles.buttonContainer}
-              onPress={onClearAllFilters}
-            >
-              <Text style={styles.clearButton}>Clear all</Text>
-            </Pressable>
-            <Pressable
-              android_ripple={{ color: "rgba(0,0,0,0.4)" }}
-              style={styles.buttonContainer}
-              onPress={onApplyFilters}
-            >
-              <Text style={styles.saveButton}>Apply</Text>
-            </Pressable>
+    <>
+      {children}
+      {toggleMenu && (
+        <View style={styles.overlay}>
+          <View style={styles.container}>
+            <ScrollView>
+              <SectionAccordion />
+            </ScrollView>
+            <View style={styles.filterActionsContainer}>
+              <Divider />
+              <View style={styles.filterActions}>
+                <Pressable
+                  android_ripple={{ color: "rgba(0,0,0,0.4)" }}
+                  style={styles.buttonContainer}
+                  onPress={onClearAllFilters}
+                >
+                  <Text style={styles.clearButton}>Clear all</Text>
+                </Pressable>
+                <Pressable
+                  android_ripple={{ color: "rgba(0,0,0,0.4)" }}
+                  style={styles.buttonContainer}
+                  onPress={onApplyFilters}
+                >
+                  <Text style={styles.saveButton}>Apply</Text>
+                </Pressable>
+              </View>
+            </View>
           </View>
         </View>
-      </View>
-    </View>
+      )}
+    </>
   );
 };
 

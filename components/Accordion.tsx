@@ -1,11 +1,19 @@
 import { Ionicons } from '@expo/vector-icons';
+import { Section } from '@models';
 import { useCallback, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Divider } from './Divider';
 
+export type AccordionItem = {
+  id: string;
+  label: string;
+  value: Section;
+};
+
 type AccordionProps = {
   items: any[];
+  alreadySelectedItems?: any[];
   onSelect: (selectedItem: any) => void;
   header: string;
   itemIdKey: string;
@@ -28,10 +36,12 @@ export const Accordion = ({
   displayKey,
   onSelect,
   itemIdKey,
+  alreadySelectedItems = [],
 }: AccordionProps) => {
   const [showItems, setShowItems] = useState<boolean>(false);
 
-  const [selectedItems, setSelectedItems] = useState<any[]>([]);
+  const [selectedItems, setSelectedItems] =
+    useState<any[]>(alreadySelectedItems);
 
   const onPressItem = useCallback(
     (selectedItem: any, itemIdKey: string) => {
