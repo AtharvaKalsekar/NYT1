@@ -11,6 +11,7 @@ module.exports = function (api) {
             "@components": "./components",
             "@models": "./models",
             "@modules": "./modules",
+            "@hooks": "./hooks",
             "@screens": "./screens",
             "@services": "./services",
             "@store": "./store",

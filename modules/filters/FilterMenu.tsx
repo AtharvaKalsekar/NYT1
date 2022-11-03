@@ -69,14 +69,14 @@ export const FilterMenu = ({ children }: FilterMenuProps) => {
               <Divider />
               <View style={styles.filterActions}>
                 <Pressable
-                  android_ripple={{ color: "rgba(0,0,0,0.4)" }}
+                  android_ripple={{ color: "rgba(255,255,255,0.4)" }}
                   style={styles.buttonContainer}
                   onPress={onClearAllFilters}
                 >
                   <Text style={styles.clearButton}>Clear all</Text>
                 </Pressable>
                 <Pressable
-                  android_ripple={{ color: "rgba(0,0,0,0.4)" }}
+                  android_ripple={{ color: "rgba(255,255,255,0.4)" }}
                   style={styles.buttonContainer}
                   onPress={onApplyFilters}
                 >
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   container: {
     top: 0,
     right: 0,
-    width: "40%",
+    width: "50%",
     height: "100%",
     position: "absolute",
     backgroundColor: "white",
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   buttonContainer: {
-    width: "30%",
+    marginHorizontal: 4,
   },
   clearButton: {
     color: "black",

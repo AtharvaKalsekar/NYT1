@@ -82,7 +82,7 @@ export const Accordion = ({
       >
         <View style={styles.headerContinaer}>
           <View style={styles.header}>
-            <Text style={styles.headerText}>{header}</Text>
+            <Text style={styles.headerText}>{header} </Text>
             {alreadySelectedItems?.length > 0 && (
               <Badge num={alreadySelectedItems.length} size={BadgeSize.LARGE} />
             )}
@@ -107,7 +107,7 @@ export const Accordion = ({
               <Pressable
                 key={item[itemIdKey]}
                 android_ripple={{
-                  color: "#9bdbfa",
+                  color: "#BCEAD5",
                 }}
                 style={[
                   styles.item,

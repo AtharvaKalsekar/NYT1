@@ -74,6 +74,8 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     textAlign: "center",
+    alignItems: "center",
+    zIndex: 10,
   },
   badgeText: {
     color: "#fff",
