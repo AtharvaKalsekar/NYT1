@@ -37,6 +37,7 @@ export const useNetwork = (): InternetStatus => {
       }
       setNetworkCheckStatus(NetworkCheckStatus.DONE);
     };
+    isInternetAvailable();
   }, []);
 
   return {
